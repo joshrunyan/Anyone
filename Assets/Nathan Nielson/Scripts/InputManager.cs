@@ -11,7 +11,6 @@ public class InputManager : MonoBehaviour
     private Controls controls;
 
     public Vector2 move;
-    public Vector2 look;
 
     public float moveAmount;
 
@@ -43,10 +42,6 @@ public class InputManager : MonoBehaviour
             move = controls.ReadValue<Vector2>();
             moveAmount = Mathf.Clamp01(Mathf.Abs(move.x) + Mathf.Abs(move.y));
         };
-
-
-        // read in camera look amounts
-        controls.Locomotion.Look.performed += controls => look = controls.ReadValue<Vector2>();
 
     }
 

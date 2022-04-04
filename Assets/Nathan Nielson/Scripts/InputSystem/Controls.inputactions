@@ -12,14 +12,6 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
-                },
-                {
-                    "name": "Look",
-                    "type": "PassThrough",
-                    "id": "7d483476-79c7-4747-a350-f1214043568c",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -77,15 +69,31 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
+                }
+            ]
+        },
+        {
+            "name": "Zoom",
+            "id": "636bce1d-ea2e-4192-a04e-30bfa314f985",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "896d8f3a-d40e-44e2-8c18-afd2f71af8ad",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
                 {
                     "name": "",
-                    "id": "41565f6e-ceb2-4a0f-b8f9-d7071d1accc7",
-                    "path": "<Mouse>/delta",
+                    "id": "43f2f115-1e0b-403a-8f6a-6316b674c04b",
+                    "path": "<Keyboard>/m",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Look",
+                    "action": "New action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

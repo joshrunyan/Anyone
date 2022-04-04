@@ -25,14 +25,6 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
-                },
-                {
-                    ""name"": ""Look"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""7d483476-79c7-4747-a350-f1214043568c"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -90,15 +82,31 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
+                }
+            ]
+        },
+        {
+            ""name"": ""Zoom"",
+            ""id"": ""636bce1d-ea2e-4192-a04e-30bfa314f985"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""896d8f3a-d40e-44e2-8c18-afd2f71af8ad"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""41565f6e-ceb2-4a0f-b8f9-d7071d1accc7"",
-                    ""path"": ""<Mouse>/delta"",
+                    ""id"": ""43f2f115-1e0b-403a-8f6a-6316b674c04b"",
+                    ""path"": ""<Keyboard>/m"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Look"",
+                    ""action"": ""New action"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -110,7 +118,9 @@ public class @Controls : IInputActionCollection, IDisposable
         // Locomotion
         m_Locomotion = asset.FindActionMap("Locomotion", throwIfNotFound: true);
         m_Locomotion_Move = m_Locomotion.FindAction("Move", throwIfNotFound: true);
-        m_Locomotion_Look = m_Locomotion.FindAction("Look", throwIfNotFound: true);
+        // Zoom
+        m_Zoom = asset.FindActionMap("Zoom", throwIfNotFound: true);
+        m_Zoom_Newaction = m_Zoom.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -161,13 +171,11 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Locomotion;
     private ILocomotionActions m_LocomotionActionsCallbackInterface;
     private readonly InputAction m_Locomotion_Move;
-    private readonly InputAction m_Locomotion_Look;
     public struct LocomotionActions
     {
         private @Controls m_Wrapper;
         public LocomotionActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Locomotion_Move;
-        public InputAction @Look => m_Wrapper.m_Locomotion_Look;
         public InputActionMap Get() { return m_Wrapper.m_Locomotion; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -180,9 +188,6 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnMove;
-                @Look.started -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnLook;
-                @Look.performed -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnLook;
-                @Look.canceled -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnLook;
             }
             m_Wrapper.m_LocomotionActionsCallbackInterface = instance;
             if (instance != null)
@@ -190,16 +195,49 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @Look.started += instance.OnLook;
-                @Look.performed += instance.OnLook;
-                @Look.canceled += instance.OnLook;
             }
         }
     }
     public LocomotionActions @Locomotion => new LocomotionActions(this);
+
+    // Zoom
+    private readonly InputActionMap m_Zoom;
+    private IZoomActions m_ZoomActionsCallbackInterface;
+    private readonly InputAction m_Zoom_Newaction;
+    public struct ZoomActions
+    {
+        private @Controls m_Wrapper;
+        public ZoomActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_Zoom_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_Zoom; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ZoomActions set) { return set.Get(); }
+        public void SetCallbacks(IZoomActions instance)
+        {
+            if (m_Wrapper.m_ZoomActionsCallbackInterface != null)
+            {
+                @Newaction.started -= m_Wrapper.m_ZoomActionsCallbackInterface.OnNewaction;
+                @Newaction.performed -= m_Wrapper.m_ZoomActionsCallbackInterface.OnNewaction;
+                @Newaction.canceled -= m_Wrapper.m_ZoomActionsCallbackInterface.OnNewaction;
+            }
+            m_Wrapper.m_ZoomActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Newaction.started += instance.OnNewaction;
+                @Newaction.performed += instance.OnNewaction;
+                @Newaction.canceled += instance.OnNewaction;
+            }
+        }
+    }
+    public ZoomActions @Zoom => new ZoomActions(this);
     public interface ILocomotionActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnLook(InputAction.CallbackContext context);
+    }
+    public interface IZoomActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }
