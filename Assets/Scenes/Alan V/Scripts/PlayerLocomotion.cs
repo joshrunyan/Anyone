@@ -44,7 +44,7 @@ public class PlayerLocomotion : MonoBehaviour
     void Update()
     {
         HandleMovement(Time.deltaTime);
-       
+        
 
     }
 
@@ -74,6 +74,10 @@ public class PlayerLocomotion : MonoBehaviour
         if (canInteract)
         {
             //show prompt
+            Debug.Log("is hitting");
+
+
+
 
         }
 
