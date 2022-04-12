@@ -11,11 +11,12 @@ public class InputManager : MonoBehaviour
     private Controls controls;
 
     public Vector2 move;
+    
+    public float moveAmount;
+
     public Vector2 look;
 
     public bool interact = false;
-
-    public float moveAmount;
 
     void Awake()
     {
@@ -55,7 +56,7 @@ public class InputManager : MonoBehaviour
 
     void OnDisable()
     {
-        //controls.Disable();
+        controls.Disable();
     }
 
 }
