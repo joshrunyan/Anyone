@@ -21,6 +21,7 @@ public class PlayerLocomotion : MonoBehaviour
 
     public Transform player;
 
+
     // Things for interactables
     [Header("Interactables")]
     public Transform head;
@@ -73,6 +74,7 @@ public class PlayerLocomotion : MonoBehaviour
         if (canInteract)
         {
             //show prompt
+
         }
 
         if(canInteract && input.interact)
