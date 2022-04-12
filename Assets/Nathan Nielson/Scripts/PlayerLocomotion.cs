@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerLocomotion : MonoBehaviour
 {
@@ -20,9 +21,17 @@ public class PlayerLocomotion : MonoBehaviour
 
     public Transform player;
 
+    // Things for interactables
+    [Header("Interactables")]
+    public Transform head;
+    public LayerMask interactableMask;
+    public bool canInteract = false; 
+
     // Start is called before the first frame update
     void Start()
     {
+        
+
         input = InputManager.instance;
         controller = GetComponent<CharacterController>();
 
@@ -38,6 +47,12 @@ public class PlayerLocomotion : MonoBehaviour
 
     }
 
+
+    private void FixedUpdate()
+    {
+        CheckForInteractable();
+    }
+
     /// <summary>
     /// Make the player move relative to the camera direction
     /// </summary>
@@ -49,5 +64,27 @@ public class PlayerLocomotion : MonoBehaviour
         controller.Move(movement * 5 * delta);
     }
 
+    private void CheckForInteractable()
+    {
+        RaycastHit hit;
+
+        canInteract = Physics.Raycast(head.position, head.forward, out hit, 3, interactableMask);
+
+        if (canInteract)
+        {
+            //show prompt
+        }
+
+        if(canInteract && input.interact)
+        {
+            hit.collider.GetComponent<Interactable>().Interact();
+        }
+
+    }
+    
 
 }
+
+   
+    
+

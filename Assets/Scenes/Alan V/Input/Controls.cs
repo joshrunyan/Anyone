@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Nathan Nielson/Scripts/InputSystem/Controls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Scenes/Alan V/Input/Controls.inputactions'
 
 using System;
 using System.Collections;
@@ -27,10 +27,18 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Look"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""7d483476-79c7-4747-a350-f1214043568c"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""c9ce4adf-5e6b-4299-9b8e-3af5cb20e90c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""04249636-929d-4a1f-aa85-28f0a74baacb"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -93,12 +101,23 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""41565f6e-ceb2-4a0f-b8f9-d7071d1accc7"",
-                    ""path"": ""<Mouse>/delta"",
+                    ""id"": ""de76bc0a-4b9c-49b1-b640-0f2deb338707"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Look"",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""04b38a33-c61f-43de-8efb-babebeb2d8c5"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -110,7 +129,8 @@ public class @Controls : IInputActionCollection, IDisposable
         // Locomotion
         m_Locomotion = asset.FindActionMap("Locomotion", throwIfNotFound: true);
         m_Locomotion_Move = m_Locomotion.FindAction("Move", throwIfNotFound: true);
-        m_Locomotion_Look = m_Locomotion.FindAction("Look", throwIfNotFound: true);
+        m_Locomotion_Inventory = m_Locomotion.FindAction("Inventory", throwIfNotFound: true);
+        m_Locomotion_Interact = m_Locomotion.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -161,13 +181,15 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Locomotion;
     private ILocomotionActions m_LocomotionActionsCallbackInterface;
     private readonly InputAction m_Locomotion_Move;
-    private readonly InputAction m_Locomotion_Look;
+    private readonly InputAction m_Locomotion_Inventory;
+    private readonly InputAction m_Locomotion_Interact;
     public struct LocomotionActions
     {
         private @Controls m_Wrapper;
         public LocomotionActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Locomotion_Move;
-        public InputAction @Look => m_Wrapper.m_Locomotion_Look;
+        public InputAction @Inventory => m_Wrapper.m_Locomotion_Inventory;
+        public InputAction @Interact => m_Wrapper.m_Locomotion_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Locomotion; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -180,9 +202,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnMove;
-                @Look.started -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnLook;
-                @Look.performed -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnLook;
-                @Look.canceled -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnLook;
+                @Inventory.started -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnInventory;
+                @Interact.started -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_LocomotionActionsCallbackInterface = instance;
             if (instance != null)
@@ -190,9 +215,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @Look.started += instance.OnLook;
-                @Look.performed += instance.OnLook;
-                @Look.canceled += instance.OnLook;
+                @Inventory.started += instance.OnInventory;
+                @Inventory.performed += instance.OnInventory;
+                @Inventory.canceled += instance.OnInventory;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -200,6 +228,7 @@ public class @Controls : IInputActionCollection, IDisposable
     public interface ILocomotionActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnLook(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

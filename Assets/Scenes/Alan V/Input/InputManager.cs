@@ -13,6 +13,8 @@ public class InputManager : MonoBehaviour
     public Vector2 move;
     public Vector2 look;
 
+    public bool interact = false;
+
     public float moveAmount;
 
     void Awake()
@@ -30,10 +32,7 @@ public class InputManager : MonoBehaviour
         controls.Enable();
     }
 
-    void OnDisable()
-    {
-        controls.Disable();
-    }
+    
 
     void Start()
     {
@@ -44,10 +43,19 @@ public class InputManager : MonoBehaviour
             moveAmount = Mathf.Clamp01(Mathf.Abs(move.x) + Mathf.Abs(move.y));
         };
 
+        controls.Locomotion.Interact.performed += controls =>
+        {
+            Debug.Log("Pressed F");
+            interact = true;
+        };
 
-        // read in camera look amounts
-        controls.Locomotion.Look.performed += controls => look = controls.ReadValue<Vector2>();
+        controls.Locomotion.Interact.canceled += controls => interact = false;
 
+    }
+
+    void OnDisable()
+    {
+        //controls.Disable();
     }
 
 }
