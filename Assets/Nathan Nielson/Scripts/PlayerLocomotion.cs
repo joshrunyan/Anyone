@@ -20,6 +20,8 @@ public class PlayerLocomotion : MonoBehaviour
 
     public Transform player;
 
+    public float rotationSpeed = 10f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +36,6 @@ public class PlayerLocomotion : MonoBehaviour
     void Update()
     {
         HandleMovement(Time.deltaTime);
-       
 
     }
 
@@ -44,9 +45,12 @@ public class PlayerLocomotion : MonoBehaviour
     /// <param name="delta"></param>
     private void HandleMovement(float delta)
     {
-        Vector3 movement = (input.move.x * cam.right) + (input.move.y * player.forward);
+        float x = input.move.x;
+        float y = input.move.y;
 
+        Vector3 movement = new Vector3(x, 0, y);
         controller.Move(movement * 5 * delta);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), .15f);
     }
 
 
