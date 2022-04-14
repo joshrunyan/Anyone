@@ -5,12 +5,18 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Alan V/Test Movemen.unity
     guid: 3683ccd964fc5c64a95e11619eea18d4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Alan V/Scene 2.unity
     guid: 99d8b698e20731741abe10152bb0879b
+  - enabled: 1
+    path: Assets/Scenes/Josh's Scenes/Main Map.unity
+    guid: 4aed6ebc73631a148be937f99817c98b
+  - enabled: 1
+    path: Assets/Scenes/Josh's Scenes/Hospital Building.unity
+    guid: aa0ecad7f516c074aa02a9889bbc05f1
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: e9949640c9454ab47a99cdd2921f6aa1,
       type: 2}

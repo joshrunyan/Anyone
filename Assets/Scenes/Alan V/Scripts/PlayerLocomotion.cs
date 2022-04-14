@@ -6,6 +6,9 @@ using TMPro;
 public class PlayerLocomotion : MonoBehaviour
 {
 
+    public GameObject interactText; 
+    
+
     // A reference to the InputManager singleton
     private InputManager input;
 
@@ -76,11 +79,16 @@ public class PlayerLocomotion : MonoBehaviour
             //show prompt
             Debug.Log("is hitting");
 
+            //if raycast is hitting a interactablechange transform of text, canvas.text.transform(x, Y, z)
 
-
+            interactText.SetActive(true);
 
         }
-
+        else
+        {
+            interactText.SetActive(false);
+        }
+        
         if(canInteract && input.interact)
         {
             hit.collider.GetComponent<Interactable>().Interact();
