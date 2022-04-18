@@ -17,6 +17,7 @@ public class InputManager : MonoBehaviour
     public Vector2 look;
 
     public bool interact = false;
+    public bool inventory = false;
 
     void Awake()
     {
@@ -50,6 +51,12 @@ public class InputManager : MonoBehaviour
             interact = true;
         };
 
+        controls.Locomotion.Inventory.performed += controls =>
+        {
+            inventory = true;
+        };
+
+        controls.Locomotion.Inventory.canceled += controls => interact = false;
         controls.Locomotion.Interact.canceled += controls => interact = false;
 
     }
