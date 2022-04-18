@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerLocomotion : MonoBehaviour
 {
+
+    public GameObject interactText; 
+    
 
     // A reference to the InputManager singleton
     private InputManager input;
@@ -20,11 +24,18 @@ public class PlayerLocomotion : MonoBehaviour
 
     public Transform player;
 
-    public float rotationSpeed = 10f;
+
+    // Things for interactables
+    [Header("Interactables")]
+    public Transform head;
+    public LayerMask interactableMask;
+    public bool canInteract = false; 
 
     // Start is called before the first frame update
     void Start()
     {
+        
+
         input = InputManager.instance;
         controller = GetComponent<CharacterController>();
 
@@ -36,7 +47,14 @@ public class PlayerLocomotion : MonoBehaviour
     void Update()
     {
         HandleMovement(Time.deltaTime);
+        
 
+    }
+
+
+    private void FixedUpdate()
+    {
+        CheckForInteractable();
     }
 
     /// <summary>
@@ -45,6 +63,7 @@ public class PlayerLocomotion : MonoBehaviour
     /// <param name="delta"></param>
     private void HandleMovement(float delta)
     {
+
         float x = input.move.x;
         float y = input.move.y;
 
@@ -53,5 +72,37 @@ public class PlayerLocomotion : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), .15f);
     }
 
+    private void CheckForInteractable()
+    {
+        RaycastHit hit;
+
+        canInteract = Physics.Raycast(head.position, head.forward, out hit, 3, interactableMask);
+
+        if (canInteract)
+        {
+            //show prompt
+            Debug.Log("is hitting");
+
+            //if raycast is hitting a interactablechange transform of text, canvas.text.transform(x, Y, z)
+
+            interactText.SetActive(true);
+
+        }
+        else
+        {
+            interactText.SetActive(false);
+        }
+        
+        if(canInteract && input.interact)
+        {
+            hit.collider.GetComponent<Interactable>().Interact();
+        }
+
+    }
+    
 
 }
+
+   
+    
+

@@ -11,8 +11,12 @@ public class InputManager : MonoBehaviour
     private Controls controls;
 
     public Vector2 move;
-
+    
     public float moveAmount;
+
+    public Vector2 look;
+
+    public bool interact = false;
 
     void Awake()
     {
@@ -29,10 +33,7 @@ public class InputManager : MonoBehaviour
         controls.Enable();
     }
 
-    void OnDisable()
-    {
-        controls.Disable();
-    }
+    
 
     void Start()
     {
@@ -43,6 +44,19 @@ public class InputManager : MonoBehaviour
             moveAmount = Mathf.Clamp01(Mathf.Abs(move.x) + Mathf.Abs(move.y));
         };
 
+        controls.Locomotion.Interact.performed += controls =>
+        {
+            Debug.Log("Pressed F");
+            interact = true;
+        };
+
+        controls.Locomotion.Interact.canceled += controls => interact = false;
+
+    }
+
+    void OnDisable()
+    {
+        controls.Disable();
     }
 
 }

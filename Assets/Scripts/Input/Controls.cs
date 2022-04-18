@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Nathan Nielson/Scripts/InputSystem/Controls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Scenes/Alan V/Scripts/Input/Controls.inputactions'
 
 using System;
 using System.Collections;
@@ -23,6 +23,22 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""type"": ""PassThrough"",
                     ""id"": ""e832a5b8-498d-4822-b654-cc89b45071c9"",
                     ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""c9ce4adf-5e6b-4299-9b8e-3af5cb20e90c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""04249636-929d-4a1f-aa85-28f0a74baacb"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -82,31 +98,26 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                }
-            ]
-        },
-        {
-            ""name"": ""Zoom"",
-            ""id"": ""636bce1d-ea2e-4192-a04e-30bfa314f985"",
-            ""actions"": [
-                {
-                    ""name"": ""New action"",
-                    ""type"": ""Button"",
-                    ""id"": ""896d8f3a-d40e-44e2-8c18-afd2f71af8ad"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                }
-            ],
-            ""bindings"": [
+                },
                 {
                     ""name"": """",
-                    ""id"": ""43f2f115-1e0b-403a-8f6a-6316b674c04b"",
-                    ""path"": ""<Keyboard>/m"",
+                    ""id"": ""de76bc0a-4b9c-49b1-b640-0f2deb338707"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""04b38a33-c61f-43de-8efb-babebeb2d8c5"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -118,9 +129,8 @@ public class @Controls : IInputActionCollection, IDisposable
         // Locomotion
         m_Locomotion = asset.FindActionMap("Locomotion", throwIfNotFound: true);
         m_Locomotion_Move = m_Locomotion.FindAction("Move", throwIfNotFound: true);
-        // Zoom
-        m_Zoom = asset.FindActionMap("Zoom", throwIfNotFound: true);
-        m_Zoom_Newaction = m_Zoom.FindAction("New action", throwIfNotFound: true);
+        m_Locomotion_Inventory = m_Locomotion.FindAction("Inventory", throwIfNotFound: true);
+        m_Locomotion_Interact = m_Locomotion.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -171,11 +181,15 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Locomotion;
     private ILocomotionActions m_LocomotionActionsCallbackInterface;
     private readonly InputAction m_Locomotion_Move;
+    private readonly InputAction m_Locomotion_Inventory;
+    private readonly InputAction m_Locomotion_Interact;
     public struct LocomotionActions
     {
         private @Controls m_Wrapper;
         public LocomotionActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Locomotion_Move;
+        public InputAction @Inventory => m_Wrapper.m_Locomotion_Inventory;
+        public InputAction @Interact => m_Wrapper.m_Locomotion_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Locomotion; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -188,6 +202,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnMove;
+                @Inventory.started -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnInventory;
+                @Interact.started -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_LocomotionActionsCallbackInterface = instance;
             if (instance != null)
@@ -195,49 +215,20 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Inventory.started += instance.OnInventory;
+                @Inventory.performed += instance.OnInventory;
+                @Inventory.canceled += instance.OnInventory;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
     public LocomotionActions @Locomotion => new LocomotionActions(this);
-
-    // Zoom
-    private readonly InputActionMap m_Zoom;
-    private IZoomActions m_ZoomActionsCallbackInterface;
-    private readonly InputAction m_Zoom_Newaction;
-    public struct ZoomActions
-    {
-        private @Controls m_Wrapper;
-        public ZoomActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_Zoom_Newaction;
-        public InputActionMap Get() { return m_Wrapper.m_Zoom; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(ZoomActions set) { return set.Get(); }
-        public void SetCallbacks(IZoomActions instance)
-        {
-            if (m_Wrapper.m_ZoomActionsCallbackInterface != null)
-            {
-                @Newaction.started -= m_Wrapper.m_ZoomActionsCallbackInterface.OnNewaction;
-                @Newaction.performed -= m_Wrapper.m_ZoomActionsCallbackInterface.OnNewaction;
-                @Newaction.canceled -= m_Wrapper.m_ZoomActionsCallbackInterface.OnNewaction;
-            }
-            m_Wrapper.m_ZoomActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Newaction.started += instance.OnNewaction;
-                @Newaction.performed += instance.OnNewaction;
-                @Newaction.canceled += instance.OnNewaction;
-            }
-        }
-    }
-    public ZoomActions @Zoom => new ZoomActions(this);
     public interface ILocomotionActions
     {
         void OnMove(InputAction.CallbackContext context);
-    }
-    public interface IZoomActions
-    {
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }
