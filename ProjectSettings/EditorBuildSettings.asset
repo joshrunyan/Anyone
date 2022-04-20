@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Final Scenes/Main Map.unity
     guid: 4aed6ebc73631a148be937f99817c98b
   - enabled: 1
-    path: Assets/PolygonPrototype/Textures/Scenes/Final Scenes/Hospital Building.unity
+    path: Assets/Scenes/Final Scenes/Hospital Building.unity
     guid: aa0ecad7f516c074aa02a9889bbc05f1
   - enabled: 1
     path: Assets/Scenes/Final Scenes/Church.unity
