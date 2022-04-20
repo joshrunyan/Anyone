@@ -12,11 +12,29 @@ EditorBuildSettings:
     path: Assets/Scenes/Alan V/Scene 2.unity
     guid: 99d8b698e20731741abe10152bb0879b
   - enabled: 1
-    path: Assets/Scenes/Josh's Scenes/Main Map.unity
+    path: Assets/Scenes/Final Scenes/Main Map.unity
     guid: 4aed6ebc73631a148be937f99817c98b
   - enabled: 1
-    path: Assets/Scenes/Josh's Scenes/Hospital Building.unity
+    path: Assets/Scenes/Final Scenes/Hospital Building.unity
     guid: aa0ecad7f516c074aa02a9889bbc05f1
+  - enabled: 1
+    path: Assets/Scenes/Final Scenes/Church.unity
+    guid: 0ca3fdcbf8951ba4bad90f9482aea8cb
+  - enabled: 1
+    path: Assets/Scenes/Final Scenes/House.unity
+    guid: 5448f0880ec10dd4fa376d520952a580
+  - enabled: 1
+    path: Assets/Scenes/Final Scenes/Jail.unity
+    guid: 773e87398360bbb408032f7a9b3a19a6
+  - enabled: 1
+    path: Assets/Scenes/Final Scenes/Police.unity
+    guid: ac8cb94bfe34c4241bfa72050ce03951
+  - enabled: 1
+    path: Assets/Scenes/Final Scenes/Store.unity
+    guid: 9ffc7dda442115648a58702073d1b836
+  - enabled: 1
+    path: Assets/Scenes/Final Scenes/Wacdonalds.unity
+    guid: 8dc28eef2b192574eb58e4c4d27513dd
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: e9949640c9454ab47a99cdd2921f6aa1,
       type: 2}
