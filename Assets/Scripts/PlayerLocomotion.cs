@@ -47,7 +47,6 @@ public class PlayerLocomotion : MonoBehaviour
     void Update()
     {
         HandleMovement(Time.deltaTime);
-        
 
     }
 
@@ -63,13 +62,16 @@ public class PlayerLocomotion : MonoBehaviour
     /// <param name="delta"></param>
     private void HandleMovement(float delta)
     {
-
+        
         float x = input.move.x;
         float y = input.move.y;
 
-        Vector3 movement = new Vector3(x, 0, y);
-        controller.Move(movement * 5 * delta);
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), .15f);
+        if (x != 0 || y != 0)
+        {
+            Vector3 movement = new Vector3(x, 0, y);
+            controller.Move(movement * 5 * delta);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), .15f);
+        }
     }
 
     private void CheckForInteractable()
