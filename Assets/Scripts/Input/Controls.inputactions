@@ -90,7 +90,7 @@
                     "name": "",
                     "id": "de76bc0a-4b9c-49b1-b640-0f2deb338707",
                     "path": "<Keyboard>/e",
-                    "interactions": "",
+                    "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "",
                     "action": "Inventory",

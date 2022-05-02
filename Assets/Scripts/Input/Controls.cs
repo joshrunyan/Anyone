@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Scenes/Alan V/Scripts/Input/Controls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/Input/Controls.inputactions'
 
 using System;
 using System.Collections;
@@ -103,7 +103,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""de76bc0a-4b9c-49b1-b640-0f2deb338707"",
                     ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Inventory"",

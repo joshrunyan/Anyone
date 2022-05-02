@@ -17,7 +17,8 @@ public class InputManager : MonoBehaviour
     public Vector2 look;
 
     public bool interact = false;
-    public bool inventory = false;
+
+    public event InventoryKeyPressed OnInventoryKeyPressed;
 
     void Awake()
     {
@@ -51,15 +52,16 @@ public class InputManager : MonoBehaviour
             interact = true;
         };
 
-        controls.Locomotion.Inventory.performed += controls =>
-        {
-            inventory = true;
-        };
-
-        controls.Locomotion.Inventory.canceled += controls => interact = false;
         controls.Locomotion.Interact.canceled += controls => interact = false;
 
+        controls.Locomotion.Inventory.performed += controls =>
+        {
+            OnInventoryKeyPressed?.Invoke();
+        };
+
     }
+
+    public delegate void InventoryKeyPressed();
 
     void OnDisable()
     {
